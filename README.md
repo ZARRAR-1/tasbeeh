@@ -1,16 +1,9 @@
 # tasbeeh
 
-A new Flutter project.
+A new Tasbeeh project on Flutter .
 
-## Getting Started
+This project is a starting point for a Tasbeeh (Rosary) Application, started up as a class assignment for the course of "Software For Mobile Devices", made by team: SNOWLEOPARDS (k191095 Ma'arij Abdul Qadir, k191069 Syed Abeer Hussain and k191056 Anish Rajput).
 
-This project is a starting point for a Flutter application.
+This application holds the current value of the counter even when the application is re-launched. This persistence is achieved by storing Key-value data on disk/device using shared_preferences plugin available at pub.dev (https://pub.dev/packages/shared_preferences). 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_20230401-220643](https://user-images.githubusercontent.com/106697920/229305126-3c90d504-34ae-4d4a-834f-c67e637111bd.png)
