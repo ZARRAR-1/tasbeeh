@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,16 +55,56 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  @override
+  void initState() {
+    super.initState();
+    _loadCounter();
+  }
+
+  //Loading counter value on start
+  Future<void> _loadCounter() async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      // Try reading data from the counter key. If it doesn't exist, return 0.
+      _counter = (prefs.getInt('counter') ?? 0);
     });
   }
+
+  // void _incrementCounter() {
+  //   setState(() {
+  //     // This call to setState tells the Flutter framework that something has
+  //     // changed in this State, which causes it to rerun the build method below
+  //     // so that the display can reflect the updated values. If we changed
+  //     // _counter without calling setState(), then the build method would not be
+  //     // called again, and so nothing would appear to happen.
+  //     _counter++;
+  //   });
+  //
+  //
+  // }
+
+  //Incrementing counter after click
+  Future<void> _incrementCounter() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      // Try reading data from the counter key. If it doesn't exist, return 0.
+      _counter = (prefs.getInt('counter') ?? 0) + 1;
+      prefs.setInt('counter', _counter);
+    });
+
+
+  }
+
+  //Reset counter after click
+  Future<void> _resetCounter() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _counter = 0;
+      prefs.setInt('counter', _counter);
+    });
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -121,11 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         // crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           FloatingActionButton(
-                            onPressed: () {
-                              setState(() {
-                                _counter = 0;
-                              });
-                            },
+                            onPressed: _resetCounter,
                             tooltip: 'Reset Counter',
                             child: const Text('Reset'),
                           ),
